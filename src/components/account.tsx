@@ -43,18 +43,15 @@ export class Account extends React.Component<Props, AccountState> {
         const networkId = await web3Wrapper.getNetworkIdAsync();
         const tokens = TOKENS_BY_NETWORK[networkId];
         // Fetch all the Balances for all of the tokens
-        const allBalancesAsync = _.map(
-            tokens,
-            async (token: Token): Promise<TokenBalanceAllowance | undefined> => {
-                if (!token.address) {
-                    return undefined;
-                }
-                const balance = await erc20TokenWrapper.getBalanceAsync(token.address, address);
-                const allowance = await erc20TokenWrapper.getProxyAllowanceAsync(token.address, address);
-                const numberBalance = new BigNumber(balance);
-                return { token, balance: numberBalance, allowance };
-            },
-        );
+        const allBalancesAsync = _.map(tokens, async (token: Token): Promise<TokenBalanceAllowance | undefined> => {
+            if (!token.address) {
+                return undefined;
+            }
+            const balance = await erc20TokenWrapper.getBalanceAsync(token.address, address);
+            const allowance = await erc20TokenWrapper.getProxyAllowanceAsync(token.address, address);
+            const numberBalance = new BigNumber(balance);
+            return { token, balance: numberBalance, allowance };
+        });
 
         const results = await Promise.all(allBalancesAsync);
         balances[address] = _.compact(results);
@@ -181,8 +178,8 @@ export class Account extends React.Component<Props, AccountState> {
         return (
             <Content style={{ marginTop: '15px' }}>
                 Below you will find the Account and token balances. The lock icon ({' '}
-                <Icon isSize="small" className="fa fa-lock" /> ) indicates that this token is not tradeable on 0x, to
-                unlock the token click the lock icon. The tick icon ({' '}
+                <Icon isSize="small" className="fa fa-lock" /> ) indicates that this token is not tradeable on 0x yet,
+                to start trading unlock the token click the lock icon. The tick icon ({' '}
                 <Icon isSize="small" className="fa fa-check-circle" style={{ color: GREEN }} /> ) indicates that this
                 token is tradeable on 0x. Some tokens are mintable on the test networks (up to a certain amount) you can
                 mint tokens by clicking the mint ( <Icon isSize="small" className="fa fa-coins" /> ) symbol.
