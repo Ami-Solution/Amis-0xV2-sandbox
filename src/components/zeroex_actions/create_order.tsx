@@ -78,12 +78,12 @@ export class CreateOrder extends React.Component<Props, CreateOrderState> {
             expirationTimeSeconds: new BigNumber(Date.now() + 10 * 60), // Time when this order expires
             makerFee: ZERO, // 0 maker fees
             takerFee: ZERO, // 0 taker fees
-            feeRecipientAddress: NULL_ADDRESS, // No fee recipient
+            feeRecipientAddress: '0x5b878ba97bae92fc0aa6133edbf2f58d52350d65', // No fee recipient
             senderAddress: NULL_ADDRESS, // Sender address is open and can be submitted by anyone
             salt: generatePseudoRandomSalt(), // Random value to provide uniqueness
             makerAssetData,
             takerAssetData,
-            exchangeAddress,
+            exchangeAddress: '0x4f833a24e1f95d70f028921e27040ca56e09ab0b',
         };
         // Generate the order hash for the order
         const orderHashHex = orderHashUtils.getOrderHashHex(order);
@@ -98,7 +98,7 @@ export class CreateOrder extends React.Component<Props, CreateOrderState> {
             this.setState({ errorMessage: err.message });
             return null as any;
         }
-    }
+    };
     public render(): React.ReactNode {
         const signedOrderRender = this.state.signedOrder ? (
             <div>
@@ -168,14 +168,14 @@ export class CreateOrder extends React.Component<Props, CreateOrderState> {
                 ? { ...prevState, makerTokenSymbol: symbol }
                 : { ...prevState, takerTokenSymbol: symbol };
         });
-    }
+    };
     public orderTokenAmountChanged = (amount: string, traderSide: TraderSide) => {
         this.setState(prevState => {
             return traderSide === TraderSide.MAKER
                 ? { ...prevState, makerAmount: amount }
                 : { ...prevState, takerAmount: amount };
         });
-    }
+    };
     public buildTokenSelector = (traderSide: TraderSide) => {
         const selected = traderSide === TraderSide.MAKER ? this.state.makerTokenSymbol : this.state.takerTokenSymbol;
         return (
@@ -189,5 +189,5 @@ export class CreateOrder extends React.Component<Props, CreateOrderState> {
                 })}
             </Select>
         );
-    }
+    };
 }
