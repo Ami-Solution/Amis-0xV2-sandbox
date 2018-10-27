@@ -7,6 +7,14 @@ export const TOKENS = {
         isMintable: true,
         image: 'https://0xproject.com/images/token_icons/ZRX.png',
     },
+    AMIS: {
+        name: 'AMIS',
+        decimals: 9,
+        symbol: 'AMIS',
+        isTradeable: true,
+        isMintable: false,
+        image: 'https://raw.githubusercontent.com/amisolution/ERC20-AMIS/master/amis-logo3.png',
+    },
     MKR: {
         name: 'Maker DAO',
         decimals: 18,
@@ -50,10 +58,40 @@ export const ETHER_TOKEN: Token = {
     image: 'https://0xproject.com/images/ether.png',
 };
 export const TOKENS_BY_NETWORK: { [networkId: number]: { [tokenSymbol: string]: Token } } = {
+    1: {
+        ZRX: {
+            ...TOKENS.ZRX,
+            address: '0xe41d2489571d322189246dafa5ebde1f4699f498',
+        },
+        AMIS: {
+            ...TOKENS.AMIS,
+            address: '0x949bEd886c739f1A3273629b3320db0C5024c719',
+        },
+        MKR: {
+            ...TOKENS.MKR,
+            address: '0x9f8f72aa9304c8b593d555f12ef6589cc3a579a2',
+        },
+        GNT: {
+            ...TOKENS.GNT,
+            address: '0xa74476443119A942dE498590Fe1f2454d7D4aC0d',
+        },
+        REP: {
+            ...TOKENS.REP,
+            address: '0x1985365e9f78359a9B6AD760e32412f4a445E862',
+        },
+        WETH: {
+            ...TOKENS.WETH,
+            address: '0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2',
+        },
+    },
     3: {
         ZRX: {
             ...TOKENS.ZRX,
             address: '0xff67881f8d12f372d91baae9752eb3631ff0ed00',
+        },
+        AMIS: {
+            ...TOKENS.AMIS,
+            address: '0x949bEd886c739f1A3273629b3320db0C5024c719',
         },
         MKR: {
             ...TOKENS.MKR,
@@ -76,6 +114,10 @@ export const TOKENS_BY_NETWORK: { [networkId: number]: { [tokenSymbol: string]: 
         ZRX: {
             ...TOKENS.ZRX,
             address: '0x2002d3812f58e35f0ea1ffbf80a75a38c32175fa',
+        },
+        AMIS: {
+            ...TOKENS.AMIS,
+            address: '0x7161f09a6ae81b546bebc04b24629c4f3dad746f',
         },
         MKR: {
             ...TOKENS.MKR,
